@@ -1,10 +1,14 @@
 package Mini_chat_test;
 
-public class MainScreen extends SQLConnection{
+public class MainScreen{
+	public SQLConnection sqlConn;
 	
-//	public MainScreen (String query){
-	//	super(query);
-	//}
+	public MainScreen (String query){
+		query = "show tables";
+		sqlConn.connection(query);
+		
+		
+	}
 	
 
 }
