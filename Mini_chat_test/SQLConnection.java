@@ -13,12 +13,14 @@ public class SQLConnection {
 		this.query = query;
 	}
 	*/
-	public void connection (String query) {
+	
+	public ResultSet connection (String query) {
 
 		try{
 			Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/mini_chat?autoReconnect=true&useSSL=false", "root", "");
 			Statement st = conn.createStatement();
 			ResultSet rs = st.executeQuery(query);
+			return rs;
 			
 		} catch (SQLException e) {
 			throw new IllegalStateException("Cannot connect the database!", e);
