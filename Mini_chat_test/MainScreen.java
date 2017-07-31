@@ -4,11 +4,9 @@ import java.util.Scanner;
 
 public class MainScreen {
 	
-	public SQLConnection sqlConn;
-	//public MainScreen (String query){
-	//	query = "show tables";
-	//}
-	public void register(){
+		SQLConnection sqlConn= new SQLConnection(); 	
+	
+	public void register() throws ClassNotFoundException{
 		
 		Scanner odczyt = new Scanner(System.in);
 		
@@ -21,8 +19,10 @@ public class MainScreen {
 		System.out.println("Enter your mail");
 		String mail = odczyt.nextLine();
 		
-		System.out.printf("Your login is: %s and password is: %s and mail is: %s ", login,password,mail);
+		System.out.printf("Your login is: %s and password is: %s and mail is: %s ", login, password, mail);
 		
-		sqlConn.connection("INSERT INTO user VALUES (NULL" + login + "," + password + "," + mail + ")");
+		sqlConn.queries("INSERT INTO user (login, password, mail) VALUES (" + login + "," + password + "," + mail + ")");
+	
+		
 	}
 }
