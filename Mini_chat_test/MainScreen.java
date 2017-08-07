@@ -2,10 +2,10 @@ package Mini_chat_test;
 
 import java.sql.SQLException;
 import java.util.Scanner;
-
-import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
+import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 
 public class MainScreen{
+	
 	public MainScreen(){
 		try {
 			sc.connection();
