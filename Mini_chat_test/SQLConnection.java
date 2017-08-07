@@ -5,6 +5,8 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
+
 public class SQLConnection {
 	
 	private Connection conn;
@@ -21,12 +23,17 @@ public class SQLConnection {
 		}	
 	}
 	
-	public void query (String query){
+	public void query (String query) throws SQLException{
 		Statement st;
 		try {
+			System.out.printf("DEBUG: Query to send: \"%s\"\n", query);
 			st = conn.createStatement();
 			st.executeUpdate(query);
-		} catch (SQLException e) {
+		}
+		catch (MySQLIntegrityConstraintViolationException e) {
+			throw e;
+		}
+		catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
