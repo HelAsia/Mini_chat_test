@@ -2,12 +2,12 @@ package Mini_chat_test;
 
 import java.util.Scanner;
 
-public class MainScreen {
+public class MainScreen{
 	
-		SQLConnection sqlConn= new SQLConnection(); 	
+	private SQLConnection sc = new SQLConnection();		
 	
 	public void register() throws ClassNotFoundException{
-		
+		sc.connection();
 		Scanner odczyt = new Scanner(System.in);
 		
 		System.out.println("Enter your login");
@@ -21,7 +21,8 @@ public class MainScreen {
 		
 		System.out.printf("Your login is: %s and password is: %s and mail is: %s ", login, password, mail);
 		
-		sqlConn.queries("INSERT INTO user (login, password, mail) VALUES (" + login + "," + password + "," + mail + ")");
+		String query = String.format("INSERT INTO user (login, password, mail) VALUES ('%s','%s','%s')",login, password, mail);
+		sc.query(query);
 	
 		
 	}
