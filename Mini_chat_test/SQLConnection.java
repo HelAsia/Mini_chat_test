@@ -3,7 +3,6 @@ package Mini_chat_test;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -40,25 +39,11 @@ public class SQLConnection {
 		}
 	}
 	
-	public void query (String query) throws SQLException{
+	public ResultSet query (String query) throws SQLException{
 		Statement st;
-		try {
-			System.out.printf("DEBUG: Query to send: \"%s\"\n", query);
-			st = conn.createStatement();
-			ResultSet rs = st.executeQuery(query);
-			
-			int count = 0;
-			while (rs.next()) {
-			    ++count;
-			}
-
-			if (count == 0) {
-			    System.out.println("No records found");
-			}
-			//st.executeQuery(query);
-		}
-		catch (SQLException e) {
-			e.printStackTrace();
-		}
+		System.out.printf("DEBUG: Query to send: \"%s\"\n", query);
+		st = conn.createStatement();
+		ResultSet rs = st.executeQuery(query);
+		return rs;
 	}
 }

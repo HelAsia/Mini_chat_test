@@ -1,5 +1,6 @@
 package Mini_chat_test;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Scanner;
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
@@ -55,11 +56,17 @@ public class MainScreen{
 		System.out.println("Enter your password");
 		String password = odczyt.nextLine();
 
-		
-		String query = String.format("SELECT login, password FROM user WHERE login = '%s'",login);
+		String query = String.format("SELECT login, password FROM user WHERE login = '%s' and password = '%s'",login, password);
 		
 		try {
-			sc.query(query);
+			ResultSet rs = sc.query(query);
+			int count = 0;
+			while (rs.next()) {
+			    ++count;
+			}
+			if (count == 0) {
+			    System.out.println("Your mail is wrong. You have to check it and try again.");
+			}
 		}
 		catch (SQLException e) {
 			e.printStackTrace();
