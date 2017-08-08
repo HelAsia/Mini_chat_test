@@ -35,7 +35,7 @@ public class MainScreen{
 		String query = String.format("INSERT INTO user (login, password, mail) VALUES ('%s','%s','%s')",login, password, mail);
 		
 		try {
-			sc.query(query);
+			sc.queryUpdate(query);
 			
 		} catch (MySQLIntegrityConstraintViolationException e) {
 			System.out.println("This login exist in database. You have to enter new login");
@@ -54,11 +54,9 @@ public class MainScreen{
 		
 		System.out.println("Enter your password");
 		String password = odczyt.nextLine();
+
 		
-		System.out.println("Enter your mail");
-		String mail = odczyt.nextLine();
-		
-		String query = String.format("INSERT INTO user (login, password, mail) VALUES ('%s','%s','%s')",login, password, mail);
+		String query = String.format("SELECT login, password FROM user WHERE login = '%s'",login);
 		
 		try {
 			sc.query(query);

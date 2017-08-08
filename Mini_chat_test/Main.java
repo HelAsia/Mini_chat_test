@@ -14,6 +14,7 @@ public class Main {
 			return;
 		}
 		
-		ms.register();
+		//ms.register();
+		ms.logIn();
 	}
 }
