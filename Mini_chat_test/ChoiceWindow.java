@@ -21,8 +21,9 @@ public class ChoiceWindow {
 				+ "[1] If you would like to REGISTER. \n"
 				+ "[2] If you would like to LOG IN. \n"
 				+ "[3] If you would like to EXIT. \n");
-		try{
-			do{
+		
+		do{
+			try{
 				Scanner number = new Scanner(System.in);
 				int userChoice = number.nextInt();
 				int ONE = 1;
@@ -46,10 +47,10 @@ public class ChoiceWindow {
 					trueOrFalse = true;
 				}
 			}
+			catch (java.util.InputMismatchException e){
+				System.out.println("Your value is wrong format. Try again");
+			}
+		}	
 			while (trueOrFalse = true);
-		}
-		catch (java.util.InputMismatchException e){
-			System.out.println("Your value is wrong format. Try again");
-		}
 	}
 }
