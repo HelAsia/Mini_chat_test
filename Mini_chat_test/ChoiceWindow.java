@@ -3,18 +3,11 @@ package Mini_chat_test;
 import java.util.Scanner;
 
 public class ChoiceWindow {
-	
-	public enum Choices {
-		ONE,
-		TWO,
-		THREE;
-	}
-	
+
 	private MainScreen ms = new MainScreen();	
 	
 	public void window (){
 
-		
 		boolean trueOrFalse = true;
 		
 		System.out.println("What would you like to do?\n"
@@ -26,19 +19,16 @@ public class ChoiceWindow {
 			try{
 				Scanner number = new Scanner(System.in);
 				int userChoice = number.nextInt();
-				int ONE = 1;
-				int TWO = 2;
-				int THREE = 3;
-				
-				if (userChoice == ONE){
+
+				if (userChoice == 1){
 					ms.register();
 					trueOrFalse = false;
 				}
-				else if (userChoice == TWO){
+				else if (userChoice == 2){
 					ms.logIn();
 					trueOrFalse = false;
 				}
-				else if (userChoice ==THREE){
+				else if (userChoice == 3){
 					System.out.println("Your window will be close");
 					trueOrFalse = false;
 				}
