@@ -3,6 +3,9 @@ package Mini_chat_test;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 
 public class MainScreen{
@@ -30,20 +33,29 @@ public class MainScreen{
 		
 		System.out.println("Enter your mail");
 		String mail = odczyt.nextLine();
+
+		Pattern pattern = Pattern.compile("\\w*@+\\w*\\.+\\w+");
+		Matcher matcher = pattern.matcher(mail);
+		matcher.matches(); //zwraca true lub false
 		
-		System.out.printf("Your login is: %s and password is: %s and mail is: %s\n", login, password, mail);
-	
-		String query = String.format("INSERT INTO user (login, password, mail) VALUES ('%s','%s','%s')",login, password, mail);
+		if (matcher.matches() == true) {
+			System.out.printf("Your login is: %s and password is: %s and mail is: %s\n", login, password, mail);
 		
-		try {
-			sc.queryUpdate(query);
+			String query = String.format("INSERT INTO user (login, password, mail) VALUES ('%s','%s','%s')",login, password, mail);
 			
-		} catch (MySQLIntegrityConstraintViolationException e) {
-			System.out.println("This login exist in database. You have to enter new login");
+			try {
+				sc.queryUpdate(query);
+				
+			} catch (MySQLIntegrityConstraintViolationException e) {
+				System.out.println("This login exist in database. You have to enter new login");
+			}
+			catch (SQLException e) {
+				e.printStackTrace();
+			}	
 		}
-		catch (SQLException e) {
-			e.printStackTrace();
-		}	
+		else{
+			System.out.println("Your mail is wrong. You have to try again.");
+		}
 	}
 	
 	public void logIn(){
@@ -55,22 +67,22 @@ public class MainScreen{
 		
 		System.out.println("Enter your password");
 		String password = odczyt.nextLine();
-
+		
 		String query = String.format("SELECT login, password FROM user WHERE login = '%s' and password = '%s'",login, password);
 		
 		try {
 			ResultSet rs = sc.query(query);
 			int count = 0;
 			while (rs.next()) {
-			    ++count;
+				++count;
 			}
 			if (count == 0) {
-			    System.out.println("Your mail is wrong. You have to check it and try again.");
+				System.out.println("Your logiMN or password is wrong. You have to check it and try again.");
 			}
 		}
 		catch (SQLException e) {
 			e.printStackTrace();
-		}		
+		}
 	}
 	
 }
