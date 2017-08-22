@@ -6,7 +6,6 @@ public class ChoiceWindow {
 
 	private MainScreen ms = new MainScreen();	
 	
-	
 	public void window (){
 
 		boolean trueOrFalse = true;
@@ -15,7 +14,7 @@ public class ChoiceWindow {
 				+ "[1] If you would like to REGISTER. \n"
 				+ "[2] If you would like to LOG IN. \n"
 				+ "[3] If you would like to EXIT. \n");
-		AfterLogIn ali = new AfterLogIn();	
+	//	AfterLogIn ali = new AfterLogIn();	
 		do{
 			try{
 				Scanner number = new Scanner(System.in);
@@ -27,7 +26,7 @@ public class ChoiceWindow {
 				}
 				else if (userChoice == 2){
 					ms.logIn();
-					ali.whatDo();
+				//	ali.whatDo();
 					
 					trueOrFalse = false;
 				}

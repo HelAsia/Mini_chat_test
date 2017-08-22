@@ -10,7 +10,7 @@ import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationExceptio
 
 public class MainScreen{
 	
-/*	public MainScreen(){
+	public MainScreen(){
 		try {
 			sc.connection();
 		}
@@ -18,7 +18,7 @@ public class MainScreen{
 			e.printStackTrace();
 		}
 	}
-	*/
+	
 	private SQLConnection sc = new SQLConnection();		
 	
 	public void register() {
