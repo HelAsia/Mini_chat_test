@@ -10,7 +10,7 @@ import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationExceptio
 
 public class MainScreen{
 	
-	public MainScreen(){
+/*	public MainScreen(){
 		try {
 			sc.connection();
 		}
@@ -18,7 +18,7 @@ public class MainScreen{
 			e.printStackTrace();
 		}
 	}
-	
+	*/
 	private SQLConnection sc = new SQLConnection();		
 	
 	public void register() {
@@ -58,7 +58,7 @@ public class MainScreen{
 		}
 	}
 	
-	public void logIn(){
+	public String logIn(){
 		
 		Scanner odczyt = new Scanner(System.in);
 		
@@ -83,5 +83,6 @@ public class MainScreen{
 		catch (SQLException e) {
 			e.printStackTrace();
 		}
+		return login;
 	}
 }

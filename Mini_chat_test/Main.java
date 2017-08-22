@@ -4,6 +4,15 @@ import java.sql.SQLException;
 
 public class Main {
 	public static void main(String args[]){
+		
+			SQLConnection sc = new SQLConnection();		
+			try {
+				sc.connection();
+			}
+			catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			}
+
 
 		ChoiceWindow cw = null;
 		

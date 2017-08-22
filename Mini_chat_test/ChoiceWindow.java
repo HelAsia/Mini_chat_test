@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class ChoiceWindow {
 
 	private MainScreen ms = new MainScreen();	
-	private AfterLogIn ali = new AfterLogIn();	
+	
 	
 	public void window (){
 
@@ -15,7 +15,7 @@ public class ChoiceWindow {
 				+ "[1] If you would like to REGISTER. \n"
 				+ "[2] If you would like to LOG IN. \n"
 				+ "[3] If you would like to EXIT. \n");
-		
+		AfterLogIn ali = new AfterLogIn();	
 		do{
 			try{
 				Scanner number = new Scanner(System.in);

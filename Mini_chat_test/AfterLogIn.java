@@ -1,8 +1,12 @@
 package Mini_chat_test;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Scanner;
 
 public class AfterLogIn{
+	
+	private MainScreen ms = new MainScreen();	
 	
 	Scanner reading = new Scanner(System.in);
 	int choice = reading .nextInt();
@@ -52,13 +56,22 @@ public class AfterLogIn{
 	}
 	
 	public void writeTo (){
+		SQLConnection sc = new SQLConnection();
 		
 		System.out.println("Enter yours friend's login");
 		String loginRecipient = reading.nextLine();
 		
 		System.out.println("Enter your message.");
 		String message = reading.nextLine();
-
+		String loginUser = ms.logIn();
+		String status = "S";
+		
+		String query = String.format("INSERT INTO conversations (loginUser, message, status, loginRecipient) VALUES ('%s','%s','%s', '%s')", loginUser, message, status, loginRecipient);
+		try {
+			sc.queryUpdate(query);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public void history(){
