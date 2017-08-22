@@ -5,6 +5,7 @@ import java.util.Scanner;
 public class ChoiceWindow {
 
 	private MainScreen ms = new MainScreen();	
+	private AfterLogIn ali = new AfterLogIn();	
 	
 	public void window (){
 
@@ -26,6 +27,8 @@ public class ChoiceWindow {
 				}
 				else if (userChoice == 2){
 					ms.logIn();
+					ali.whatDo();
+					
 					trueOrFalse = false;
 				}
 				else if (userChoice == 3){

@@ -23,16 +23,16 @@ public class MainScreen{
 	
 	public void register() {
 		
-		Scanner odczyt = new Scanner(System.in);
+		Scanner reading = new Scanner(System.in);
 	
 		System.out.println("Enter your login");
-		String login = odczyt.nextLine();
+		String login = reading.nextLine();
 		
 		System.out.println("Enter your password");
-		String password = odczyt.nextLine();
+		String password = reading.nextLine();
 		
 		System.out.println("Enter your mail");
-		String mail = odczyt.nextLine();
+		String mail = reading.nextLine();
 
 		Pattern pattern = Pattern.compile("\\w*@+\\w*\\.+\\w+");
 		Matcher matcher = pattern.matcher(mail);
@@ -84,5 +84,4 @@ public class MainScreen{
 			e.printStackTrace();
 		}
 	}
-	
 }
