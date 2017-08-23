@@ -60,7 +60,6 @@ public class MainScreen{
 		}
 	}
 	
-	
 	public boolean logIn(){
 		
 		if (this.currentlyLogin != null && !this.currentlyLogin .isEmpty()){
@@ -98,7 +97,7 @@ public class MainScreen{
 	}
 
 	public String getCurrentlyLogin() {
-		return currentlyLogin;
+		return this.currentlyLogin;
 	}
 	
 }

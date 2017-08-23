@@ -6,9 +6,17 @@ import java.util.Scanner;
 
 public class AfterLogIn{
 	
-	private MainScreen ms = new MainScreen();	
+	private MainScreen roboczyObiektMainScreen;
 	
-	Scanner reading = new Scanner(System.in);
+	public AfterLogIn(MainScreen ms) {
+		this.roboczyObiektMainScreen = ms;
+	}
+	
+	
+	public void setMainScreenObject(MainScreen ms) {
+		this.roboczyObiektMainScreen = ms;
+	}
+	//Scanner reading = new Scanner(System.in);
 	
 	public void whatDo () {
 				
@@ -18,14 +26,12 @@ public class AfterLogIn{
 			+ "[3] If you would like to REFRESH MESSAGES. \n"
 			+ "[4] If you would like to LOG OUT. \n");
 	
+	Scanner reading = new Scanner(System.in);
 	int choice = reading .nextInt();
 	boolean falseOrTrue = true;
 	
 	do{
 		try{
-			//Scanner number = new Scanner(System.in);
-			//int userChoice = reading.nextInt();
-
 			if (choice == 1){
 				writeTo();
 				falseOrTrue = false;
@@ -52,18 +58,18 @@ public class AfterLogIn{
 		}
 	}	
 		while (falseOrTrue = true);
-
 	}
 	
 	public void writeTo (){
 		SQLConnection sc = new SQLConnection();
+		Scanner reading = new Scanner(System.in);
 		
 		System.out.println("Enter yours friend's login. \n");
 		String loginRecipient = reading.nextLine();
 		
 		System.out.println("Enter your message. \n");
 		String message = reading.nextLine();
-		String loginUser = ms.getCurrentlyLogin();
+		String loginUser = roboczyObiektMainScreen.getCurrentlyLogin();
 		String status = "S";
 		
 		String query = String.format("INSERT INTO conversations (loginUser, message, status, loginRecipient) VALUES ('%s','%s','%s', '%s')", loginUser, message, status, loginRecipient);

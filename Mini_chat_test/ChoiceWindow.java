@@ -3,8 +3,9 @@ package Mini_chat_test;
 import java.util.Scanner;
 
 public class ChoiceWindow {
+	
 
-	private MainScreen ms = new MainScreen();	
+	private MainScreen mainObjectClassMainScreen = new MainScreen();	
 	
 	public void window (){
 
@@ -14,20 +15,22 @@ public class ChoiceWindow {
 				+ "[1] If you would like to REGISTER. \n"
 				+ "[2] If you would like to LOG IN. \n"
 				+ "[3] If you would like to EXIT. \n");
-		AfterLogIn ali = new AfterLogIn();	
+		
+		AfterLogIn ali = new AfterLogIn(mainObjectClassMainScreen) ;
+		
 		do{
 			try{
 				Scanner number = new Scanner(System.in);
 				int userChoice = number.nextInt();
 
 				if (userChoice == 1){
-					ms.register();
+					mainObjectClassMainScreen.register();
 					loopEnd = false;
 				}
 				else if (userChoice == 2){
-					if (ms.logIn()){
+					if (mainObjectClassMainScreen.logIn()){
 				
-						String a = ms.getCurrentlyLogin();
+						String a = mainObjectClassMainScreen.getCurrentlyLogin();
 						String b = "";
 						Boolean c = a.equals(b);
 						if (c == false ){
