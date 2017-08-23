@@ -15,6 +15,19 @@ public class Main {
 			return;
 		}
 		cw.window();
+		
+		/*	
+AfterLogIn ali = null;
+		
+		try{
+			ali = new AfterLogIn();
+		}
+		catch(IllegalStateException e){
+			System.out.println("Database is offline");
+			return;
+		}
+		ali.whatDo();
+		*/
 	}
 }
 

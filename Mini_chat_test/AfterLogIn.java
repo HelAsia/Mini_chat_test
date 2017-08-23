@@ -9,22 +9,22 @@ public class AfterLogIn{
 	private MainScreen ms = new MainScreen();	
 	
 	Scanner reading = new Scanner(System.in);
-	int choice = reading .nextInt();
 	
 	public void whatDo () {
-		
+				
 	System.out.println("What would you like to do?\n"
 			+ "[1] If you would like to WRITE TO SOMEONE. \n"
 			+ "[2] If you would like to CHECK YOUR HISTORY. \n"
 			+ "[3] If you would like to REFRESH MESSAGES. \n"
 			+ "[4] If you would like to LOG OUT. \n");
-
+	
+	int choice = reading .nextInt();
 	boolean falseOrTrue = true;
 	
 	do{
 		try{
-			Scanner number = new Scanner(System.in);
-			int userChoice = number.nextInt();
+			//Scanner number = new Scanner(System.in);
+			//int userChoice = reading.nextInt();
 
 			if (choice == 1){
 				writeTo();
@@ -58,12 +58,12 @@ public class AfterLogIn{
 	public void writeTo (){
 		SQLConnection sc = new SQLConnection();
 		
-		System.out.println("Enter yours friend's login");
+		System.out.println("Enter yours friend's login. \n");
 		String loginRecipient = reading.nextLine();
 		
-		System.out.println("Enter your message.");
+		System.out.println("Enter your message. \n");
 		String message = reading.nextLine();
-		String loginUser = ms.logIn();
+		String loginUser = ms.getCurrentlyLogin();
 		String status = "S";
 		
 		String query = String.format("INSERT INTO conversations (loginUser, message, status, loginRecipient) VALUES ('%s','%s','%s', '%s')", loginUser, message, status, loginRecipient);

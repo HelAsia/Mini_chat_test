@@ -10,6 +10,8 @@ import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationExceptio
 
 public class MainScreen{
 	
+	private String currentlyLogin;
+	
 	public MainScreen(){
 		try {
 			sc.connection();
@@ -58,8 +60,12 @@ public class MainScreen{
 		}
 	}
 	
-	public String logIn(){
+	
+	public boolean logIn(){
 		
+		if (this.currentlyLogin != null && !this.currentlyLogin .isEmpty()){
+			return true;
+		}
 		Scanner odczyt = new Scanner(System.in);
 		
 		System.out.println("Enter your login");
@@ -77,12 +83,22 @@ public class MainScreen{
 				++count;
 			}
 			if (count == 0) {
-				System.out.println("Your logiMN or password is wrong. You have to check it and try again.");
+				System.out.println("Your login or password is wrong. You have to check it and try again.");
+			}
+			else{
+				this.currentlyLogin = login;
+				return true;
 			}
 		}
 		catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return login;
+		return false;
+		
 	}
+
+	public String getCurrentlyLogin() {
+		return currentlyLogin;
+	}
+	
 }
