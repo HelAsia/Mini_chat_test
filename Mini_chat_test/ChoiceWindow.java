@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class ChoiceWindow {
 	
 
-	private MainScreen mainObjectClassMainScreen = new MainScreen();	
+	private MainScreen mainObjectClassMainScreen = new MainScreen(); // ma polaczenie	
 	
 	public void window (){
 

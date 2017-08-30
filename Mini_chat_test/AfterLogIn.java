@@ -6,17 +6,19 @@ import java.util.Scanner;
 
 public class AfterLogIn{
 	
-	private MainScreen roboczyObiektMainScreen;
+	SQLConnection mainObjectSQLConnection = new SQLConnection();
+	
+	private MainScreen workingObjectMainScreen;
+	
+	//MainScreen ms = new MainScreen (mainObjectSQLConnection);
 	
 	public AfterLogIn(MainScreen ms) {
-		this.roboczyObiektMainScreen = ms;
+		this.workingObjectMainScreen = ms;
 	}
-	
-	
+
 	public void setMainScreenObject(MainScreen ms) {
-		this.roboczyObiektMainScreen = ms;
+		this.workingObjectMainScreen = ms;
 	}
-	//Scanner reading = new Scanner(System.in);
 	
 	public void whatDo () {
 				
@@ -61,7 +63,7 @@ public class AfterLogIn{
 	}
 	
 	public void writeTo (){
-		SQLConnection sc = new SQLConnection();
+		
 		Scanner reading = new Scanner(System.in);
 		
 		System.out.println("Enter yours friend's login. \n");
@@ -69,12 +71,12 @@ public class AfterLogIn{
 		
 		System.out.println("Enter your message. \n");
 		String message = reading.nextLine();
-		String loginUser = roboczyObiektMainScreen.getCurrentlyLogin();
+		String loginUser = workingObjectMainScreen.getCurrentlyLogin();
 		String status = "S";
 		
 		String query = String.format("INSERT INTO conversations (loginUser, message, status, loginRecipient) VALUES ('%s','%s','%s', '%s')", loginUser, message, status, loginRecipient);
 		try {
-			sc.queryUpdate(query);
+			mainObjectSQLConnection.queryUpdate(query);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

@@ -9,11 +9,12 @@ public class Main {
 		
 		try{
 			cw = new ChoiceWindow();
+			cw.window();
 		}
 		catch(IllegalStateException e){
 			System.out.println("Database is offline");
 		}
-		cw.window();
+		
 	}
 }
 

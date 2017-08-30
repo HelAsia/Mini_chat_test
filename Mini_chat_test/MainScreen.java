@@ -11,18 +11,17 @@ import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationExceptio
 public class MainScreen{
 	
 	private String currentlyLogin;
+	private SQLConnection workingObjectSQLConnection = new SQLConnection();
 	
-	public MainScreen(){
+	/*public MainScreen(){
 		try {
-			sc.connection();
+			workingObjectSQLConnection.connection();
 		}
 		catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
 	}
-	
-	private SQLConnection sc = new SQLConnection();		
-	
+	*/
 	public void register() {
 		
 		Scanner reading = new Scanner(System.in);
@@ -46,7 +45,7 @@ public class MainScreen{
 			String query = String.format("INSERT INTO user (login, password, mail) VALUES ('%s','%s','%s')",login, password, mail);
 			
 			try {
-				sc.queryUpdate(query);
+				workingObjectSQLConnection.queryUpdate(query);
 				
 			} catch (MySQLIntegrityConstraintViolationException e) {
 				System.out.println("This login exist in database. You have to enter new login");
@@ -76,7 +75,7 @@ public class MainScreen{
 		String query = String.format("SELECT login, password FROM user WHERE login = '%s' and password = '%s'",login, password);
 		
 		try {
-			ResultSet rs = sc.query(query);
+			ResultSet rs = workingObjectSQLConnection.query(query);
 			int count = 0;
 			while (rs.next()) {
 				++count;
