@@ -2,6 +2,8 @@ package Mini_chat_test;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Scanner;
 
 public class AfterLogIn{
@@ -74,7 +76,18 @@ public class AfterLogIn{
 		String loginUser = workingObjectMainScreen.getCurrentlyLogin();
 		String status = "S";
 		
-		String query = String.format("INSERT INTO conversations (loginUser, message, status, loginRecipient) VALUES ('%s','%s','%s', '%s')", loginUser, message, status, loginRecipient);
+		  Calendar cal = Calendar.getInstance();
+
+	      int year = cal.get(Calendar.YEAR);
+	      int month = cal.get(Calendar.MONTH);      
+	      int day = cal.get(Calendar.DAY_OF_MONTH);
+	      int hour = cal.get(Calendar.HOUR_OF_DAY);
+	      int minute = cal.get(Calendar.MINUTE);
+	      int second = cal.get(Calendar.SECOND);
+	   
+	       
+		String query = String.format("INSERT INTO conversations (text, date, time) VALUES ('%s','%04d-%02d-%02d','%02d:%02d:%02d')", 
+				message,year,month+1,day, hour, minute, second);
 		try {
 			mainObjectSQLConnection.queryUpdate(query);
 		} catch (SQLException e) {
