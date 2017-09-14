@@ -74,7 +74,7 @@ public class AfterLogIn{
 		System.out.println("Enter your message. \n");
 		String message = reading.nextLine();
 		String loginUser = workingObjectMainScreen.getCurrentlyLogin();
-		String status = "S";
+		String status = "N";
 		
 		  Calendar cal = Calendar.getInstance();
 
@@ -84,15 +84,43 @@ public class AfterLogIn{
 	      int hour = cal.get(Calendar.HOUR_OF_DAY);
 	      int minute = cal.get(Calendar.MINUTE);
 	      int second = cal.get(Calendar.SECOND);
-	   
-	       
-		String query = String.format("INSERT INTO conversations (text, date, time) VALUES ('%s','%04d-%02d-%02d','%02d:%02d:%02d')", 
-				message,year,month+1,day, hour, minute, second);
+	      int idUser = 0;
+	      int idConversations = 0;
+	    
+	    try {
+	    	String checkIdUser = String.format("Select ID_user FROM user Where login = \"%s\"", loginUser);
+	    	ResultSet rs = mainObjectSQLConnection.query(checkIdUser);
+	    	idUser = rs.getInt(1);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	    
+	    String addConversation = String.format("INSERT INTO conversations (ID_user, loginRecipient) VALUES (%d,\"%s\")", 
+	    		idUser, loginRecipient);
+		try {
+			mainObjectSQLConnection.queryUpdate(addConversation);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	    
+		
+		try {
+			String checkIdConversations = String.format("Select ID_conversations FROM conversations Where ID_user = \"%s\" and loginRecipient = \"%s\" ", idUser, loginRecipient);
+		    ResultSet rs1 = mainObjectSQLConnection.query(checkIdConversations);
+		    idConversations = rs1.getInt(1);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	   /* 
+		String query = String.format("INSERT INTO message (text, ID_conversations, data_time) VALUES (\"%s\",'%04d-%02d-%02d %02d:%02d:%02d')", 
+				message, idConverstaions, year,month+1,day, hour, minute, second);
 		try {
 			mainObjectSQLConnection.queryUpdate(query);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	*/
 	}
 	
 	public void history(){
