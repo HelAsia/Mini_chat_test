@@ -90,14 +90,15 @@ public class AfterLogIn{
 	    try {
 	    	String checkIdUser = String.format("Select ID_user FROM user Where login = \"%s\"", loginUser);
 	    	ResultSet rs = mainObjectSQLConnection.query(checkIdUser);
+	    	rs.next();
 	    	idUser = rs.getInt(1);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	    
-	    String addConversation = String.format("INSERT INTO conversations (ID_user, loginRecipient) VALUES (%d,\"%s\")", 
-	    		idUser, loginRecipient);
 		try {
+			String addConversation = String.format("INSERT INTO conversations (ID_user, loginRecipient) VALUES (%d,\"%s\")", 
+		    		idUser, loginRecipient);
 			mainObjectSQLConnection.queryUpdate(addConversation);
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -107,20 +108,19 @@ public class AfterLogIn{
 		try {
 			String checkIdConversations = String.format("Select ID_conversations FROM conversations Where ID_user = \"%s\" and loginRecipient = \"%s\" ", idUser, loginRecipient);
 		    ResultSet rs1 = mainObjectSQLConnection.query(checkIdConversations);
+		    rs1.next();
 		    idConversations = rs1.getInt(1);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
-	   /* 
-		String query = String.format("INSERT INTO message (text, ID_conversations, data_time) VALUES (\"%s\",'%04d-%02d-%02d %02d:%02d:%02d')", 
-				message, idConverstaions, year,month+1,day, hour, minute, second);
+	
+		String addMessage = String.format("INSERT INTO message (text, ID_conversations, date_time, status) VALUES (\"%s\", %d, '%04d-%02d-%02d %02d:%02d:%02d', \"%s\")", 
+				message, idConversations, year,month+1,day, hour, minute, second, status);
 		try {
-			mainObjectSQLConnection.queryUpdate(query);
+			mainObjectSQLConnection.queryUpdate(addMessage);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-	*/
 	}
 	
 	public void history(){
