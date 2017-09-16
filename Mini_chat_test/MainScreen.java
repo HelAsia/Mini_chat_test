@@ -48,7 +48,7 @@ public class MainScreen{
 				workingObjectSQLConnection.queryUpdate(query);
 				
 			} catch (MySQLIntegrityConstraintViolationException e) {
-				System.out.println("This login exist in database. You have to enter new login");
+				System.out.println("This login or password exist in database. You have to enter new login and password");
 			}
 			catch (SQLException e) {
 				e.printStackTrace();
