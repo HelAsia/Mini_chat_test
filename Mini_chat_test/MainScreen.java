@@ -13,15 +13,6 @@ public class MainScreen{
 	private String currentlyLogin;
 	private SQLConnection workingObjectSQLConnection = new SQLConnection();
 	
-	/*public MainScreen(){
-		try {
-			workingObjectSQLConnection.connection();
-		}
-		catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-	}
-	*/
 	public void register() {
 		
 		Scanner reading = new Scanner(System.in);
@@ -57,6 +48,8 @@ public class MainScreen{
 		else{
 			System.out.println("Your mail is wrong. You have to try again.");
 		}
+		
+		
 	}
 	
 	public boolean logIn(){

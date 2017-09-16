@@ -30,22 +30,25 @@ public class AfterLogIn{
 			+ "[3] If you would like to CHECK YOUR HISTORY. \n"
 			+ "[4] If you would like to LOG OUT. \n");
 	
-	Scanner reading = new Scanner(System.in);
-	int choice = reading .nextInt();
+	Scanner reading1 = new Scanner(System.in);
+	int choice = reading1 .nextInt();
 	boolean didntDo = true;
 	
 	do{
 		try{
 			if (choice == 1){
 				writeTo();
+				returnToTheMenu();
 				didntDo = false;
 			}
 			else if (choice == 2){
 				readMessage();
+				returnToTheMenu();
 				didntDo = false;
 			}
 			else if (choice == 3){
 				history();
+				returnToTheMenu();
 				didntDo = false;
 			}
 			else if (choice == 4){
@@ -167,8 +170,8 @@ public class AfterLogIn{
 				       System.out.print(unreadMessage + ", ");
 				   }
 				   else if (i == 3){
-				   String unreadMessage = rs.getString(i);
-			       System.out.println(unreadMessage + ", ");
+					   String unreadMessage = rs.getString(i);
+				       System.out.println(unreadMessage + ", ");
 				   } 
 			   } 
 		   }
@@ -178,7 +181,7 @@ public class AfterLogIn{
 		}
 		boolean wrongChoice = true;
 		do{
-			System.out.println("\n What would you like to do?\n"
+			System.out.println("\nWhat would you like to do?\n"
 					+ "[1] If you would like to MARK YOUR MESSAGE AS READ. \n"
 					+ "[2] If you would like to GO OUT AND DON'T READ MESSAGE. \n");
 			Scanner reading = new Scanner(System.in);
@@ -216,10 +219,74 @@ public class AfterLogIn{
 	}
 	
 	public void history(){
+		String loginUser = workingObjectMainScreen.getCurrentlyLogin();
+		try {
+			String checkUnreadMessage = String.format("select u.login, m.text, m.date_time, m.status "
+					+ "from user as u, message as m, conversations as c "
+					+ "where m.ID_conversations = c.ID_conversations AND c.ID_user = u.ID_user and c.loginRecipient = \"%s\"", loginUser);
+			
+		    ResultSet rs = mainObjectSQLConnection.query(checkUnreadMessage);
+		    
+		    System.out.println("Sender login, You unread messages, Date and time message, If read = \"Y\" if don't read = \"N\"");
+		   while (rs.next()){
+			   for (int i = 1; i <= 4; i++) {
+				   if (i == 1){
+					   String unreadMessage = rs.getString(i);
+				       System.out.print(unreadMessage + ", ");
+				   }
+				   else if (i == 2){
+					   String unreadMessage = rs.getString(i);
+				       System.out.print(unreadMessage + ", ");
+				   }
+				   else if (i == 3){
+					   String unreadMessage = rs.getString(i);
+				       System.out.print(unreadMessage + ", ");
+				   } 
+				   else if (i == 4){
+					   String unreadMessage = rs.getString(i);
+				       System.out.println(unreadMessage + ", ");
+				   } 
+			   } 
+		   }
 		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public void logOut(){
 		objectChoiceWindow.window();
+	}
+	
+	public void returnToTheMenu(){
+		System.out.println("Press: \n"
+				+ "[1] If You would like to return to the menu. \n"
+				+ "[2] If You wolud like to log out. \n");
+		
+		Scanner reading = new Scanner(System.in);
+		int choice = reading .nextInt();
+		boolean didntDo = true;
+		
+		do{
+			try{
+				if (choice == 1){
+					whatDo();
+					didntDo = false;
+				}
+				else if (choice == 2){
+					objectChoiceWindow.window();
+					didntDo = false;
+				}
+				else{
+					System.out.println("Your choice is wrong. Try again");
+					didntDo = true;
+				}
+			}
+			catch (java.util.InputMismatchException e){
+				System.out.println("Your value is wrong format. Try again");
+				didntDo = true;
+			}
+		}	
+			while (didntDo == true);
 	}
 }

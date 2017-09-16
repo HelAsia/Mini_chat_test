@@ -11,7 +11,7 @@ public class ChoiceWindow {
 
 		boolean loopEnd = true;
 		
-		System.out.println("What would you like to do?\n"
+		System.out.println("\n What would you like to do?\n"
 				+ "[1] If you would like to REGISTER. \n"
 				+ "[2] If you would like to LOG IN. \n"
 				+ "[3] If you would like to EXIT. \n");
@@ -25,6 +25,7 @@ public class ChoiceWindow {
 
 				if (userChoice == 1){
 					mainObjectClassMainScreen.register();
+					ali.whatDo();
 					loopEnd = false;
 				}
 				else if (userChoice == 2){
@@ -36,7 +37,6 @@ public class ChoiceWindow {
 						if (c == false ){
 							ali.whatDo();
 						}
-
 						loopEnd = false;
 					}
 				}
