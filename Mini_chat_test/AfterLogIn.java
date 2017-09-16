@@ -9,6 +9,7 @@ import java.util.Scanner;
 public class AfterLogIn{
 	
 	SQLConnection mainObjectSQLConnection = new SQLConnection();
+	ChoiceWindow objectChoiceWindow = new ChoiceWindow();
 	
 	private MainScreen workingObjectMainScreen;
 	
@@ -24,9 +25,10 @@ public class AfterLogIn{
 				
 	System.out.println("What would you like to do?\n"
 			+ "[1] If you would like to WRITE TO SOMEONE. \n"
-			+ "[2] If you would like to CHECK YOUR HISTORY. \n"
-			+ "[3] If you would like to REFRESH MESSAGES. \n"
-			+ "[4] If you would like to LOG OUT. \n");
+			+ "[2] If you would like to READ YOUR MESSAGES. \n"
+			+ "[3] If you would like to CHECK YOUR HISTORY. \n"
+			+ "[4] If you would like to REFRESH MESSAGES. \n"
+			+ "[5] If you would like to LOG OUT. \n");
 	
 	Scanner reading = new Scanner(System.in);
 	int choice = reading .nextInt();
@@ -39,14 +41,18 @@ public class AfterLogIn{
 				didntDo = false;
 			}
 			else if (choice == 2){
-				history();
+				readMessage();
 				didntDo = false;
 			}
 			else if (choice == 3){
-				refresh();
+				history();
 				didntDo = false;
 			}
 			else if (choice == 4){
+				refresh();
+				didntDo = false;
+			}
+			else if (choice == 5){
 				logOut();
 				didntDo = false;
 			}
@@ -144,6 +150,10 @@ public class AfterLogIn{
 		}
 	}
 	
+	public void readMessage(){
+		
+	}
+	
 	public void history(){
 		
 	}
@@ -153,6 +163,7 @@ public class AfterLogIn{
 	}
 	
 	public void logOut(){
+		objectChoiceWindow.window();
 		
 	}
 }
