@@ -1,6 +1,7 @@
 package Mini_chat_test;
 
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.Date;
@@ -151,6 +152,25 @@ public class AfterLogIn{
 	}
 	
 	public void readMessage(){
+		String loginUser = workingObjectMainScreen.getCurrentlyLogin();
+		try {
+			String checkUnreadMessage = String.format("select u.login as 'Sender login', m.text as 'You unread messages', m.date_time as 'Date and time message' "
+					+ "from user as u,  message as m, conversations as c "
+					+ "where m.ID_conversations = c.ID_conversations AND c.ID_user = u.ID_user and u.login = \"%s\" and m.status = \"N\"", loginUser);
+			
+		    ResultSet rs = mainObjectSQLConnection.query(checkUnreadMessage);
+		    ResultSetMetaData rsmd = rs.getMetaData();
+		    int columnsNumber = rsmd.getColumnCount();
+		   while (rs.next()){
+			   for (int i = 1; i <= columnsNumber; i++) {
+				   if (i > 1) System.out.print(",  ");
+			        String unreadMessage = rs.getString(i);
+			        System.out.print(unreadMessage + " " + rsmd.getColumnName(i));
+			   }
+		   }
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		
 	}
 	
