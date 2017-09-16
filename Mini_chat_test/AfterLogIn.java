@@ -154,8 +154,8 @@ public class AfterLogIn{
 	public void readMessage(){
 		String loginUser = workingObjectMainScreen.getCurrentlyLogin();
 		try {
-			String checkUnreadMessage = String.format("select u.login as 'Sender login', m.text as 'You unread messages', m.date_time as 'Date and time message' "
-					+ "from user as u,  message as m, conversations as c "
+			String checkUnreadMessage = String.format("select u.login, m.text, m.date_time "
+					+ "from user as u, message as m, conversations as c "
 					+ "where m.ID_conversations = c.ID_conversations AND c.ID_user = u.ID_user and c.loginRecipient = \"%s\" and m.status = \"N\"", loginUser);
 			
 		    ResultSet rs = mainObjectSQLConnection.query(checkUnreadMessage);
@@ -174,15 +174,50 @@ public class AfterLogIn{
 				   else if (i == 3){
 				   String unreadMessage = rs.getString(i);
 			       System.out.println(unreadMessage + ", ");
-				   }
-				  
+				   } 
 			   } 
 		   }
-		 
+		
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+		boolean wrongChoice = true;
+		do{
+			System.out.println("\n What would you like to do?\n"
+					+ "[1] If you would like to MARK YOUR MESSAGE AS READ. \n"
+					+ "[2] If you would like to GO OUT AND DON'T READ MESSAGE. \n");
+			Scanner reading = new Scanner(System.in);
+			int choice = reading .nextInt();
+			
+			if (choice == 1){
+				try {
+				    String checkIdUser = String.format("select m.ID_message "
+				    	+ "from user as u, message as m, conversations as c "
+				    	+ "where m.ID_conversations = c.ID_conversations AND c.ID_user = u.ID_user and c.loginRecipient = \"%s\" and m.status = \"N\"", loginUser);
+				    ResultSet rs = mainObjectSQLConnection.query(checkIdUser);
+				    
+				    while (rs.next()){
+					    int idUnreadMessage = rs.getInt(1);
+					    String addStatusY = String.format("update message "
+					    		+ "set status = \"Y\" "
+					    		+ "where ID_message = %d;", idUnreadMessage);
+					   mainObjectSQLConnection.queryUpdate(addStatusY);
+				    }
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+				wrongChoice = false;
+			}
+			else if (choice == 2){
+				whatDo();
+				wrongChoice = false;
+			}
+			else{
+				System.out.println("Your choice is wrong. Try again.");
+				wrongChoice = true;
+			}
+		}
+		while (wrongChoice == true);
 	}
 	
 	public void history(){
