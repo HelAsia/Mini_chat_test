@@ -24,11 +24,11 @@ public class AfterLogIn{
 	
 	public void whatDo () {
 				
-	System.out.println("What would you like to do?\n"
-			+ "[1] If you would like to WRITE TO SOMEONE. \n"
-			+ "[2] If you would like to READ YOUR MESSAGES. \n"
-			+ "[3] If you would like to CHECK YOUR HISTORY. \n"
-			+ "[4] If you would like to LOG OUT. \n");
+	System.out.println("\nWhat would you like to do?\n"
+			+ "[1] WRITE TO SOMEONE \n"
+			+ "[2] READ YOUR UNREAD MESSAGES \n"
+			+ "[3] CHECK YOUR HISTORY \n"
+			+ "[4] LOG OUT \n");
 	
 	Scanner reading1 = new Scanner(System.in);
 	int choice = reading1 .nextInt();
@@ -182,8 +182,9 @@ public class AfterLogIn{
 		boolean wrongChoice = true;
 		do{
 			System.out.println("\nWhat would you like to do?\n"
-					+ "[1] If you would like to MARK YOUR MESSAGE AS READ. \n"
-					+ "[2] If you would like to GO OUT AND DON'T READ MESSAGE. \n");
+					+ "[1] MARK YOUR MESSAGE AS READ \n"
+					+ "[2] GO OUT AND DON'T READ MESSAGE \n");
+			
 			Scanner reading = new Scanner(System.in);
 			int choice = reading .nextInt();
 			
@@ -259,9 +260,9 @@ public class AfterLogIn{
 	}
 	
 	public void returnToTheMenu(){
-		System.out.println("Press: \n"
-				+ "[1] If You would like to return to the menu. \n"
-				+ "[2] If You wolud like to log out. \n");
+		System.out.println("\nWhat would you like to do now?\n"
+				+ "[1] RETURN TO THE MENU \n"
+				+ "[2] LOG OUT \n");
 		
 		Scanner reading = new Scanner(System.in);
 		int choice = reading .nextInt();

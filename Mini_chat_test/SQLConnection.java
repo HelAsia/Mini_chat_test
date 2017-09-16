@@ -18,9 +18,8 @@ public class SQLConnection {
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-			
-		}
+		}	
+	}
 	
 	public void connection () throws ClassNotFoundException {
 		
@@ -33,7 +32,6 @@ public class SQLConnection {
 			throw new IllegalStateException("Cannot connect the database!", e);
 		}	
 	}
-	
 	
 	public void queryUpdate (String query) throws SQLException{
 		Statement st;

@@ -11,10 +11,10 @@ public class ChoiceWindow {
 
 		boolean loopEnd = true;
 		
-		System.out.println("\n What would you like to do?\n"
-				+ "[1] If you would like to REGISTER. \n"
-				+ "[2] If you would like to LOG IN. \n"
-				+ "[3] If you would like to EXIT. \n");
+		System.out.println("\nWhat would you like to do?\n"
+				+ "[1] REGISTER \n"
+				+ "[2] LOG IN \n"
+				+ "[3] EXIT \n");
 		
 		AfterLogIn ali = new AfterLogIn(mainObjectClassMainScreen) ;
 		
