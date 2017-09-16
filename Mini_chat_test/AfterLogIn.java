@@ -79,6 +79,7 @@ public class AfterLogIn{
 				int count = 0;
 				while (rs.next()) {
 					++count;
+					wrongFriendLogin = false;
 				}
 				if (count == 0) {
 					System.out.println("Your friend login is wrong. You have to check it and try again. \n");
