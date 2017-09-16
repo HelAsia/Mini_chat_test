@@ -92,11 +92,9 @@ public class MainScreen{
 			e.printStackTrace();
 		}
 		return false;
-		
 	}
 
 	public String getCurrentlyLogin() {
 		return this.currentlyLogin;
 	}
-	
 }
