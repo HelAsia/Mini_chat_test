@@ -158,20 +158,23 @@ public class AfterLogIn{
 			
 		    ResultSet rs = mainObjectSQLConnection.query(checkUnreadMessage);
 		    
-		    System.out.println("Sender login, You unread messages, Date and time message");
+		    System.out.format("%-20s%-100s%-25s",
+		    	    "Sender login", "You unread messages", "Date and time message");
+		   
 		   while (rs.next()){
 			   for (int i = 1; i <= 3; i++) {
 				   if (i == 1){
 					   String unreadMessage = rs.getString(i);
-				       System.out.print(unreadMessage + ", ");
+					   System.out.println("\n");
+					   System.out.format("%-20s", unreadMessage);
 				   }
 				   else if (i == 2){
 					   String unreadMessage = rs.getString(i);
-				       System.out.print(unreadMessage + ", ");
+					   System.out.format("%-100s", unreadMessage);
 				   }
 				   else if (i == 3){
 					   String unreadMessage = rs.getString(i);
-				       System.out.println(unreadMessage + ", ");
+					   System.out.format("%-25s", unreadMessage);
 				   } 
 			   } 
 		   }
@@ -228,28 +231,29 @@ public class AfterLogIn{
 			
 		    ResultSet rs = mainObjectSQLConnection.query(checkUnreadMessage);
 		    
-		    System.out.println("Sender login, You unread messages, Date and time message, If read = \"Y\" if don't read = \"N\"");
+		    System.out.format("%-20s%-100s%-25s%-30s",
+		    	    "Sender login", "You unread messages", "Date and time message", "If read = \"Y\" if don't read = \"N\"");
 		   while (rs.next()){
 			   for (int i = 1; i <= 4; i++) {
 				   if (i == 1){
 					   String unreadMessage = rs.getString(i);
-				       System.out.print(unreadMessage + ", ");
+					   System.out.println("\n");
+					   System.out.format("%-20s", unreadMessage);
 				   }
 				   else if (i == 2){
 					   String unreadMessage = rs.getString(i);
-				       System.out.print(unreadMessage + ", ");
+					   System.out.format("%-100s", unreadMessage);
 				   }
 				   else if (i == 3){
 					   String unreadMessage = rs.getString(i);
-				       System.out.print(unreadMessage + ", ");
+					   System.out.format("%-25s", unreadMessage);
 				   } 
 				   else if (i == 4){
 					   String unreadMessage = rs.getString(i);
-				       System.out.println(unreadMessage + ", ");
+					   System.out.format("%-30s", unreadMessage);
 				   } 
 			   } 
 		   }
-		
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
