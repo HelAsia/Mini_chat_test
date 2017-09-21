@@ -9,8 +9,8 @@ public class AdministratorPanel{
 	
 	public void adminPanel(){
 		
-		Boolean goodAdminData;
-		Boolean wrongChoice;
+		boolean goodAdminData;
+		boolean wrongChoice;
 			
 		do {
 		
@@ -86,7 +86,7 @@ public void print(){
 }	
 	
 public void remove(){
-	String whoRemove = "Who would like to remove? \n";
+	System.out.println("Who would you like to remove? \n");
 	print();
 	
 	Scanner odczyt = new Scanner(System.in);
@@ -102,7 +102,64 @@ public void remove(){
 }		
 	
 public void edit(){
-	
+	boolean goodLogin = false;
+	do{
+		System.out.println("Who would you like to edit? \n");
+		print();
+		System.out.println("\nWrite login. \n");
+		Scanner odczyt = new Scanner(System.in);
+		String howUser = odczyt.nextLine();
+		
+		String queryCheck = String.format("Select login from user WHERE login = \"%s\";", howUser);
+		try {
+			ResultSet rs = mainObjectClassSQLConnection.query(queryCheck);
+			int count = 0;
+			while (rs.next()) {
+				++count;
+			}
+			if (count == 0) {
+				System.out.println("This login doesn't exist. You have to check it and try again.");
+				goodLogin = false;
+			}
+			else{
+				goodLogin = true;
+				boolean goodChoiceEdit;
+				do {
+					System.out.println("What would you like to edit? \n"
+							+ "[1] LOGIN \n"
+							+ "[2] PASSWORD \n");
+					Scanner odczyt1 = new Scanner(System.in);
+					int whatEdit = odczyt1.nextInt();
+					if (whatEdit == 1){
+						System.out.println("What is a new login for this user? \n");
+						//odczyt.next();
+						Scanner odczyt3 = new Scanner(System.in);
+						String newLogin = odczyt3.nextLine();
+						String editLogin = String.format("Update user set login = \"%s\" where login = \"%s\";", newLogin, howUser );
+						mainObjectClassSQLConnection.queryUpdate(editLogin);
+						System.out.println("Login has been changed");
+						goodChoiceEdit = true;
+						
+					}else if (whatEdit == 2){
+						System.out.println("What is a new password for this user? \n");
+						String newPassword = odczyt.nextLine();
+						String editPassword = String.format("Update user set password = \"%s\" where login = \"%s\";", newPassword, howUser);
+						mainObjectClassSQLConnection.queryUpdate(editPassword);
+						System.out.println("Password has been changed");
+						goodChoiceEdit = true;
+					}
+					else {
+						System.out.println("Your choice is wrong. You have to check it and try again.");
+						goodChoiceEdit = false;
+					}
+				}while(goodChoiceEdit == false);
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}	
+		
+	} while (goodLogin == false);
 }		
 	
 public void block(){
