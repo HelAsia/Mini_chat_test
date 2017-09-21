@@ -33,7 +33,7 @@ public class MainScreen{
 		if (matcher.matches() == true) {
 			System.out.printf("Your login is: %s and password is: %s and mail is: %s\n", login, password, mail);
 		
-			String query = String.format("INSERT INTO user (login, password, mail) VALUES ('%s','%s','%s')",login, password, mail);
+			String query = String.format("INSERT INTO user (login, password, mail, ifBlocked) VALUES ('%s','%s','%s', 0)",login, password, mail);
 			
 			try {
 				workingObjectSQLConnection.queryUpdate(query);
