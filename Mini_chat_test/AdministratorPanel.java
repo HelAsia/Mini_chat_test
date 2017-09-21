@@ -86,7 +86,19 @@ public void print(){
 }	
 	
 public void remove(){
+	String whoRemove = "Who would like to remove? \n";
+	print();
 	
+	Scanner odczyt = new Scanner(System.in);
+	String loginToRemove = odczyt.nextLine();
+	
+	String query = String.format("delete from user where login = \"%s\"", loginToRemove);
+	try {
+		mainObjectClassSQLConnection.queryUpdate(query);
+		System.out.printf("This login: %s has been deleted. \n", loginToRemove);
+	} catch (SQLException e) {
+		e.printStackTrace();
+	}
 }		
 	
 public void edit(){
