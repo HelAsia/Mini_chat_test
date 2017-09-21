@@ -6,6 +6,7 @@ public class ChoiceWindow {
 	
 
 	private MainScreen mainObjectClassMainScreen = new MainScreen(); // ma polaczenie	
+	private AdministratorPanel mainObjectAdministratorPanel = new AdministratorPanel ();
 	
 	public void window (){
 
@@ -14,7 +15,8 @@ public class ChoiceWindow {
 		System.out.println("\nWhat would you like to do?\n"
 				+ "[1] REGISTER \n"
 				+ "[2] LOG IN \n"
-				+ "[3] EXIT \n");
+				+ "[3] ADMIN \n"
+				+ "[4] EXIT \n");
 		
 		AfterLogIn ali = new AfterLogIn(mainObjectClassMainScreen) ;
 		
@@ -41,6 +43,10 @@ public class ChoiceWindow {
 					}
 				}
 				else if (userChoice == 3){
+					mainObjectAdministratorPanel.adminPanel();
+					loopEnd = false;
+				}
+				else if (userChoice == 4){
 					System.out.println("Your window will be close");
 					loopEnd = false;
 				}

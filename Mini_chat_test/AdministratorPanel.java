@@ -10,7 +10,7 @@ public class AdministratorPanel{
 	public void adminPanel(){
 		
 		Boolean goodAdminData;
-		Boolean goodChoice;
+		Boolean wrongChoice;
 			
 		do {
 		
@@ -25,11 +25,11 @@ public class AdministratorPanel{
 			String adminData = "admin";
 			
 			if (adminLogin.equals(adminData)){
-				System.out.println("You are in Administrator Panel. What are You doing now?"
-						+ "[1] PRINT ALL USERS"
-						+ "[2] REMOVE SOME USER"
-						+ "[3] EDIT SOME USER"
-						+ "[4] BLOCK SOME USER");
+				System.out.println("You are in Administrator Panel. What are You doing now? \n"
+						+ "[1] PRINT ALL USERS \n"
+						+ "[2] REMOVE SOME USER \n"
+						+ "[3] EDIT SOME USER \n"
+						+ "[4] BLOCK SOME USER \n");
 				goodAdminData = true;
 				
 				do{
@@ -38,31 +38,31 @@ public class AdministratorPanel{
 						int userChoice = number.nextInt();
 	
 						if (userChoice == 1){
-							
-							goodChoice = false;
+							print();
+							wrongChoice = false;
 						}
 						else if (userChoice == 2){
-							
-								goodChoice = false;
+							remove();
+							wrongChoice = false;
 						}
 						else if (userChoice == 3){
-							
-							goodChoice = false;
+							edit();
+							wrongChoice = false;
 						}
 						else if (userChoice == 4){
-							
-							goodChoice = false;
+							block();
+							wrongChoice = false;
 						}
 						else{
 							System.out.println("Your choice is wrong. Try again");
-							goodChoice = true;
+							wrongChoice = true;
 						}
 					}
 					catch (java.util.InputMismatchException e){
 						System.out.println("Your value is wrong format. Try again");
 					}
 				}	
-					while (goodChoice = true);
+					while (wrongChoice = true);
 			} else {
 				System.out.println("Sorry, Your login or password is wrong. You can't log in as ADMIN. Try again");
 				goodAdminData = false;
@@ -72,7 +72,17 @@ public class AdministratorPanel{
 	}
 		
 public void print(){
-	
+	String columnName = "Logins users: \n";
+	try {
+		ResultSet rs = mainObjectClassSQLConnection.query("Select login from user;");
+		System.out.println(columnName);
+		while (rs.next()){
+			String allUser = rs.getString(1);
+			System.out.println(allUser);
+		}
+	} catch (SQLException e) {
+		e.printStackTrace();
+	}
 }	
 	
 public void remove(){
