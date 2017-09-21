@@ -48,8 +48,6 @@ public class MainScreen{
 		else{
 			System.out.println("Your mail is wrong. You have to try again.");
 		}
-		
-		
 	}
 	
 	public boolean logIn(){

@@ -36,7 +36,7 @@ public class SQLConnection {
 	public void queryUpdate (String query) throws SQLException{
 		Statement st;
 		try {
-			System.out.printf("DEBUG: Query to send: \"%s\"\n", query);
+			//System.out.printf("DEBUG: Query to send: \"%s\"\n", query);
 			st = conn.createStatement();
 			st.executeUpdate(query);
 		}
@@ -50,7 +50,7 @@ public class SQLConnection {
 	
 	public ResultSet query (String query) throws SQLException{
 		Statement st;
-		System.out.printf("DEBUG: Query to send: \"%s\"\n", query);
+		//System.out.printf("DEBUG: Query to send: \"%s\"\n", query);
 		st = conn.createStatement();
 		ResultSet rs = st.executeQuery(query);
 		return rs;
