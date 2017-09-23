@@ -12,7 +12,7 @@ public class SQLConnection {
 	
 	private Connection conn;
 	
-	public SQLConnection (){
+	/*public SQLConnection (){
 		try {
 			connection();
 		} catch (ClassNotFoundException e) {
@@ -20,13 +20,13 @@ public class SQLConnection {
 			e.printStackTrace();
 		}	
 	}
-	
+	*/
 	public void connection () throws ClassNotFoundException {
 		
 		try{
 			Class.forName("com.mysql.jdbc.Driver");
 			this.conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/mini_chat?autoReconnect=true&useSSL=false", "root", "");//
-			System.out.println("connected");
+			//System.out.println("connected");
 			
 		} catch (SQLException e) {
 			throw new IllegalStateException("Cannot connect the database!", e);

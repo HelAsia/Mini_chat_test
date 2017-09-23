@@ -4,12 +4,11 @@ import java.util.Scanner;
 
 public class ChoiceWindow {
 	
-
-	private MainScreen mainObjectClassMainScreen = new MainScreen(); // ma polaczenie	
-	private AdministratorPanel mainObjectAdministratorPanel = new AdministratorPanel ();
-	
 	public void window (){
 
+		MainScreen objectMainScreen = new MainScreen();
+		AdministratorPanel objectAdministratorPanel = new AdministratorPanel ();
+		
 		boolean loopEnd = true;
 		
 		System.out.println("\nWhat would you like to do?\n"
@@ -18,7 +17,7 @@ public class ChoiceWindow {
 				+ "[3] ADMIN \n"
 				+ "[4] EXIT \n");
 		
-		AfterLogIn ali = new AfterLogIn(mainObjectClassMainScreen) ;
+		AfterLogIn objectAfterLogIn = new AfterLogIn(objectMainScreen) ;
 		
 		do{
 			try{
@@ -26,24 +25,24 @@ public class ChoiceWindow {
 				int userChoice = number.nextInt();
 
 				if (userChoice == 1){
-					mainObjectClassMainScreen.register();
-					ali.whatDo();
+					objectMainScreen.register();
+					objectAfterLogIn.whatDo();
 					loopEnd = false;
 				}
 				else if (userChoice == 2){
-					if (mainObjectClassMainScreen.logIn()){
+					if (objectMainScreen.logIn()){
 				
-						String a = mainObjectClassMainScreen.getCurrentlyLogin();
+						String a = objectMainScreen.getCurrentlyLogin();
 						String b = "";
 						Boolean c = a.equals(b);
 						if (c == false ){
-							ali.whatDo();
+							objectAfterLogIn.whatDo();
 						}
 						loopEnd = false;
 					}
 				}
 				else if (userChoice == 3){
-					mainObjectAdministratorPanel.adminPanel();
+					objectAdministratorPanel.adminPanel();
 					loopEnd = false;
 				}
 				else if (userChoice == 4){
