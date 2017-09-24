@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Scanner;
+import java.util.Vector;
 
 public class AfterLogIn{
 	
@@ -291,3 +292,4 @@ public class AfterLogIn{
 			while (didntDo == true);
 	}
 }
+

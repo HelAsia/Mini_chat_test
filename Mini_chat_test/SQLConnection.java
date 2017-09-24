@@ -11,16 +11,7 @@ import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationExceptio
 public class SQLConnection {
 	
 	private Connection conn;
-	
-	/*public SQLConnection (){
-		try {
-			connection();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}	
-	}
-	*/
+
 	public void connection () throws ClassNotFoundException {
 		
 		try{
