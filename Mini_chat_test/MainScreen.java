@@ -11,8 +11,24 @@ import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationExceptio
 public class MainScreen{
 	
 	private String currentlyLogin;
-	private SQLConnection workingObjectSQLConnection = new SQLConnection();
+	private SQLConnection objectSQLConnectionMs = new SQLConnection();
 	
+	public MainScreen (){
+		try {
+			objectSQLConnectionMs.connection();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	public SQLConnection getSQLConnection (){
+		return objectSQLConnectionMs;
+	}
+/*
+	public void setObjectSQLConnection (SQLConnection sql){
+		this. objectSQLConnection = sql;
+	}
+	*/
 	public void register() {
 		
 		Scanner reading = new Scanner(System.in);
@@ -33,10 +49,10 @@ public class MainScreen{
 		if (matcher.matches() == true) {
 			System.out.printf("Your login is: %s and password is: %s and mail is: %s\n", login, password, mail);
 		
-			String query = String.format("INSERT INTO user (login, password, mail) VALUES ('%s','%s','%s')",login, password, mail);
+			String query = String.format("INSERT INTO user (login, password, mail, ifBlocked) VALUES ('%s','%s','%s', 0)",login, password, mail);
 			
 			try {
-				workingObjectSQLConnection.queryUpdate(query);
+				objectSQLConnectionMs.queryUpdate(query);
 				
 			} catch (MySQLIntegrityConstraintViolationException e) {
 				System.out.println("This login or password exist in database. You have to enter new login and password");
@@ -47,7 +63,7 @@ public class MainScreen{
 		}
 		else{
 			System.out.println("Your mail is wrong. You have to try again.");
-		}
+		}	
 	}
 	
 	public boolean logIn(){
@@ -66,7 +82,7 @@ public class MainScreen{
 		String query = String.format("SELECT login, password FROM user WHERE login = '%s' and password = '%s'",login, password);
 		
 		try {
-			ResultSet rs = workingObjectSQLConnection.query(query);
+			ResultSet rs = objectSQLConnectionMs.query(query);
 			int count = 0;
 			while (rs.next()) {
 				++count;
