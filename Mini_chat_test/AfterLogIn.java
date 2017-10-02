@@ -292,5 +292,88 @@ public class AfterLogIn{
 		}	
 			while (didntDo == true);
 	}
+	
+	private  Vector<Integer> sizeColumnVector = new Vector<Integer>();
+
+	public void wyswietl(Vector<String> kolumny, Vector<Vector<String>> tab) {
+
+		String valueColumn = "";
+		Integer sizeOneColumnOld = 0;
+		Integer sizeOneColumnNew = 0;
+		int sum = 0;
+		String sign = "-";
+		
+		for(int n = 0; n < 1; n ++) {
+			Vector<String> wiersz = tab.get(n);
+			
+			for(int m = 0; m < wiersz.size(); m++) {
+
+				valueColumn = wiersz.get(m);
+				sizeOneColumnNew = valueColumn.length(); // I set the initial value for sizeColumnVector
+				sizeColumnVector.add(m,sizeOneColumnNew); // I add the initial value for sizeColumnVector
+			}
+		}
+		
+		for(int n = 1; n < tab.size(); n ++) {
+			Vector<String> wiersz = tab.get(n);
+			
+			for(int m = 0; m < wiersz.size(); m++) {
+
+				valueColumn = wiersz.get(m);
+				sizeOneColumnNew = valueColumn.length();
+				
+				sizeOneColumnOld = sizeColumnVector.get(m);
+				
+				if (sizeOneColumnNew > sizeOneColumnOld){ // I equal previous and next value 
+					 sizeColumnVector.set(m,sizeOneColumnNew); // I change previous value
+				}
+			}
+		}
+		
+		for(int i = 0; i < kolumny.size(); i ++){
+			valueColumn = kolumny.get(i);
+			sizeOneColumnNew = valueColumn.length();
+			
+			sizeOneColumnOld = sizeColumnVector.get(i);
+			
+			if (sizeOneColumnNew > sizeOneColumnOld){
+				 sizeColumnVector.set(i,sizeOneColumnNew);
+			}
+		}
+	
+		for (int j = 0; j < sizeColumnVector.size(); j ++){
+			sum = sum + sizeColumnVector.get(j); // I count sum of columns size
+		}
+	sum = sum + 10;
+		
+		for(int i = 0; i < kolumny.size(); i ++){
+			getWidthColumn();
+			String formatString = String.format("%%-%ds", getWidthColumn().get(i));
+			System.out.format(formatString, kolumny.get(i));
+			System.out.print(" |");
+		}
+		System.out.println("");
+		String repeated = new String(new char[sum]).replace("\0", sign);
+		System.out.println(repeated);
+				
+		for(int n = 0; n < tab.size(); n ++) {
+			
+			Vector<String> wiersz = tab.get(n);
+			
+			for(int m = 0; m < wiersz.size(); m++) {
+				String kolumna = wiersz.get(m);
+				getWidthColumn();
+				
+				String formatString = String.format("%%-%ds", getWidthColumn().get(m));
+				System.out.format(formatString, kolumna);
+				System.out.print(" |");
+			}
+			System.out.println("");
+			System.out.println(repeated);
+		}	
+	}
+	public Vector getWidthColumn(){
+		return sizeColumnVector;
+	}
 }
 
