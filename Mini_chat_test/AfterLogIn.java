@@ -3,6 +3,7 @@ package Mini_chat_test;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Scanner;
@@ -156,30 +157,33 @@ public class AfterLogIn{
 			
 		    ResultSet rs = objectSQLConnectionAl.query(checkUnreadMessage);
 		    
-		    System.out.format("%-20s%-100s%-25s",
-		    	    "Sender login", "You unread messages", "Date and time message");
-		   
-		   while (rs.next()){
-			   for (int i = 1; i <= 3; i++) {
-				   if (i == 1){
-					   String unreadMessage = rs.getString(i);
-					   System.out.println("\n");
-					   System.out.format("%-20s", unreadMessage);
-				   }
-				   else if (i == 2){
-					   String unreadMessage = rs.getString(i);
-					   System.out.format("%-100s", unreadMessage);
-				   }
-				   else if (i == 3){
-					   String unreadMessage = rs.getString(i);
-					   System.out.format("%-25s", unreadMessage);
+		    Vector<Vector<String>> table = new Vector<Vector<String>>();
+		    
+		    String[] column = {"Sender login", "You unread messages", "Date and time message"};
+			Vector<String> vectorColumn = new Vector<String>(Arrays.asList(column));
+			
+			if (rs != null) {
+				
+			   while (rs.next()){
+				    String[] line = new String[3];
+				   for (int i = 1; i <= 3; i++) {
+					  line [i-1] = rs.getString(i);
 				   } 
-			   } 
-		   }
+				   table.add(new Vector<String>(Arrays.asList(line)));
+			   }
+		   wyswietl(vectorColumn,table);
+		   markMessage();
+		  }
+		  else{
+			  System.out.println("You haven't a new messages");
+		  }
 		
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+	public void markMessage(){	
+		String loginUser = objectMainScreen.getCurrentlyLogin();
 		boolean wrongChoice = true;
 		do{
 			System.out.println("\nWhat would you like to do?\n"

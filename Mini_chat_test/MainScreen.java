@@ -12,6 +12,7 @@ public class MainScreen{
 	
 	private String currentlyLogin;
 	private SQLConnection objectSQLConnectionMs = new SQLConnection();
+	private ChoiceWindow objectChoiceWindow = new ChoiceWindow ();
 	
 	public MainScreen (){
 		try {
@@ -85,6 +86,7 @@ public class MainScreen{
 			}
 			if (count == 0) {
 				System.out.println("Your login or password is wrong. You have to check it and try again.");
+				objectChoiceWindow.window();
 			}
 			else{
 				this.currentlyLogin = login;
