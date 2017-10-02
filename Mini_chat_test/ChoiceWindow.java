@@ -7,7 +7,7 @@ public class ChoiceWindow {
 	public void window (){
 
 		MainScreen objectMainScreen = new MainScreen();
-		AdministratorPanel objectAdministratorPanel = new AdministratorPanel ();
+		AdministratorPanel objectAdministratorPanel = new AdministratorPanel (objectMainScreen);
 		
 		boolean loopEnd = true;
 		

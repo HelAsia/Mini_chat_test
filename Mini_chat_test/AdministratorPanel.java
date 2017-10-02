@@ -5,7 +5,16 @@ import java.sql.SQLException;
 import java.util.Scanner;
 
 public class AdministratorPanel{
-	private SQLConnection mainObjectClassSQLConnection = new SQLConnection();
+	
+	SQLConnection objectSQLConnectionAp;
+	
+	private MainScreen objectMainScreen;
+
+	public AdministratorPanel(MainScreen ms) {
+		this.objectMainScreen = ms;
+		objectSQLConnectionAp = ms.getSQLConnection();
+	}
+	//private SQLConnection mainObjectClassSQLConnection = new SQLConnection();
 	
 	public void adminPanel(){
 		
@@ -24,7 +33,7 @@ public class AdministratorPanel{
 			
 			String adminData = "admin";
 			
-			if (adminLogin.equals(adminData)){
+			if (adminLogin.equals(adminData) & adminPassword.equals(adminData)){
 				System.out.println("You are in Administrator Panel. What are You doing now? \n"
 						+ "[1] PRINT ALL USERS \n"
 						+ "[2] REMOVE SOME USER \n"
@@ -84,7 +93,7 @@ public class AdministratorPanel{
 	public void print(){
 		String columnName = "Logins users: \n";
 		try {
-			ResultSet rs = mainObjectClassSQLConnection.query("Select login from user;");
+			ResultSet rs = objectSQLConnectionAp.query("Select login from user;");
 			System.out.println(columnName);
 			while (rs.next()){
 				String allUser = rs.getString(1);
@@ -104,7 +113,7 @@ public class AdministratorPanel{
 		
 		String query = String.format("delete from user where login = \"%s\"", loginToRemove);
 		try {
-			mainObjectClassSQLConnection.queryUpdate(query);
+			objectSQLConnectionAp.queryUpdate(query);
 			System.out.printf("This login: %s has been deleted. \n", loginToRemove);
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -122,7 +131,7 @@ public class AdministratorPanel{
 			
 			String queryCheck = String.format("Select login from user WHERE login = \"%s\";", howUser);
 			try {
-				ResultSet rs = mainObjectClassSQLConnection.query(queryCheck);
+				ResultSet rs = objectSQLConnectionAp.query(queryCheck);
 				int count = 0;
 				while (rs.next()) {
 					++count;
@@ -146,7 +155,7 @@ public class AdministratorPanel{
 							Scanner odczyt3 = new Scanner(System.in);
 							String newLogin = odczyt3.nextLine();
 							String editLogin = String.format("Update user set login = \"%s\" where login = \"%s\";", newLogin, howUser );
-							mainObjectClassSQLConnection.queryUpdate(editLogin);
+							objectSQLConnectionAp.queryUpdate(editLogin);
 							System.out.println("Login has been changed");
 							goodChoiceEdit = true;
 							
@@ -154,7 +163,7 @@ public class AdministratorPanel{
 							System.out.println("What is a new password for this user? \n");
 							String newPassword = odczyt.nextLine();
 							String editPassword = String.format("Update user set password = \"%s\" where login = \"%s\";", newPassword, howUser);
-							mainObjectClassSQLConnection.queryUpdate(editPassword);
+							objectSQLConnectionAp.queryUpdate(editPassword);
 							System.out.println("Password has been changed");
 							goodChoiceEdit = true;
 						}
@@ -179,7 +188,7 @@ public class AdministratorPanel{
 		String blockLogin = odczyt.nextLine();
 		String queryBlock = String.format("Update user set ifBlocked = 1 where login = \"%s\";", blockLogin);
 		try {
-			mainObjectClassSQLConnection.queryUpdate(queryBlock);
+			objectSQLConnectionAp.queryUpdate(queryBlock);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -193,7 +202,7 @@ public class AdministratorPanel{
 		String unblockLogin = odczyt.nextLine();
 		String queryUnblock = String.format("Update user set ifBlocked = 0 where login = \"%s\";", unblockLogin);
 		try {
-			mainObjectClassSQLConnection.queryUpdate(queryUnblock);
+			objectSQLConnectionAp.queryUpdate(queryUnblock);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -203,7 +212,7 @@ public class AdministratorPanel{
 	public void listblocked(){	
 		String columnName = "Blocked Logins users: \n";
 		try {
-			ResultSet rs = mainObjectClassSQLConnection.query("Select login from user where ifBlocked = 1;");
+			ResultSet rs = objectSQLConnectionAp.query("Select login from user where ifBlocked = 1;");
 			System.out.println(columnName);
 			while (rs.next()){
 				String allBlockedUser = rs.getString(1);
