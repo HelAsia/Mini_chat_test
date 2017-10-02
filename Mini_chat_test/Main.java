@@ -1,6 +1,7 @@
 package Mini_chat_test;
 
 import java.sql.SQLException;
+import java.util.Vector;
 
 public class Main {
 	public static void main(String args[]){

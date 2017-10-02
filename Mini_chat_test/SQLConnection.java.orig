@@ -1,0 +1,57 @@
+package Mini_chat_test;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
+
+public class SQLConnection {
+	
+	private Connection conn;
+
+	public void connection () throws ClassNotFoundException {
+		
+		try{
+			Class.forName("com.mysql.jdbc.Driver");
+			this.conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/mini_chat?autoReconnect=true&useSSL=false", "root", "");//
+			//System.out.println("connected");
+			
+		} catch (SQLException e) {
+			throw new IllegalStateException("Cannot connect the database!", e);
+		}	
+	}
+	
+	public void queryUpdate (String query) throws SQLException{
+		Statement st;
+		try {
+<<<<<<< HEAD
+			//System.out.printf("DEBUG: Query to send: \"%s\"\n", query);
+=======
+		//	System.out.printf("DEBUG: Query to send: \"%s\"\n", query);
+>>>>>>> admin_panel
+			st = conn.createStatement();
+			st.executeUpdate(query);
+		}
+		catch (MySQLIntegrityConstraintViolationException e) {
+			throw e;
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public ResultSet query (String query) throws SQLException{
+		Statement st;
+<<<<<<< HEAD
+		//System.out.printf("DEBUG: Query to send: \"%s\"\n", query);
+=======
+	//	System.out.printf("DEBUG: Query to send: \"%s\"\n", query);
+>>>>>>> admin_panel
+		st = conn.createStatement();
+		ResultSet rs = st.executeQuery(query);
+		return rs;
+	}
+}

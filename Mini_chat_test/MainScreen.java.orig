@@ -24,7 +24,11 @@ public class MainScreen{
 	public SQLConnection getSQLConnection (){
 		return objectSQLConnectionMs;
 	}
-
+/*
+	public void setObjectSQLConnection (SQLConnection sql){
+		this. objectSQLConnection = sql;
+	}
+	*/
 	public void register() {
 		
 		Scanner reading = new Scanner(System.in);
@@ -59,7 +63,11 @@ public class MainScreen{
 		}
 		else{
 			System.out.println("Your mail is wrong. You have to try again.");
+<<<<<<< HEAD
+		}
+=======
 		}	
+>>>>>>> admin_panel
 	}
 	
 	public boolean logIn(){
