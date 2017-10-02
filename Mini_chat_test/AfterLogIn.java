@@ -233,29 +233,27 @@ public class AfterLogIn{
 			
 		    ResultSet rs = objectSQLConnectionAl.query(checkUnreadMessage);
 		    
-		    System.out.format("%-20s%-100s%-25s%-30s",
-		    	    "Sender login", "You unread messages", "Date and time message", "If read = \"Y\" if don't read = \"N\"");
-		   while (rs.next()){
-			   for (int i = 1; i <= 4; i++) {
-				   if (i == 1){
-					   String unreadMessage = rs.getString(i);
-					   System.out.println("\n");
-					   System.out.format("%-20s", unreadMessage);
-				   }
-				   else if (i == 2){
-					   String unreadMessage = rs.getString(i);
-					   System.out.format("%-100s", unreadMessage);
-				   }
-				   else if (i == 3){
-					   String unreadMessage = rs.getString(i);
-					   System.out.format("%-25s", unreadMessage);
+		    Vector<Vector<String>> table = new Vector<Vector<String>>();
+		    
+		    String[] column = {"Sender login", "You unread messages", "Date and time message", "\"Y\" or \"N\""};
+			Vector<String> vectorColumn = new Vector<String>(Arrays.asList(column));
+			
+			if (rs != null) {
+				
+			   while (rs.next()){
+				    String[] line = new String[4];
+				   for (int i = 1; i <= 4; i++) {
+					  line [i-1] = rs.getString(i);
 				   } 
-				   else if (i == 4){
-					   String unreadMessage = rs.getString(i);
-					   System.out.format("%-30s", unreadMessage);
-				   } 
-			   } 
-		   }
+				   table.add(new Vector<String>(Arrays.asList(line)));
+			   }
+		   wyswietl(vectorColumn,table);
+		   markMessage();
+		  }
+		  else{
+			  System.out.println("You haven't a new messages");
+		  }
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
